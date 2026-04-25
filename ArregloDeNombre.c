@@ -1,37 +1,67 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define TAMA 100
+
+void MostrarPersonas(char *nom[] , int cant);
+int buscarNombrePorClave(char *nom[], int cant , char *frase);
 
 int main(){
-    int cant=5, largo=100;
-    char *nombres[cant];
-    char nomb[largo];
-    printf("Ingrese 5 nombres:\n ");
-
-    for (int i = 0; i < cant; i++){
-        printf("Nombre %d:\n ", i+1);
-        fgets(nomb, largo, stdin);
-        nomb[strcspn(nomb, "\n")];
-
-        int longitud= strlen(nomb);
-        nombres[i]= (char *)malloc(longitud * sizeof(char));
-        
-        strcpy(nombres[i],nomb);
+    int cantNombres = 5;
+    char buff[TAMA];
+    char *nombres[cantNombres];
     
+    for (int i = 0; i < cantNombres; i++)
+    {
+        printf("ingrese el nombre numero %d: ", i + 1);
+        gets(buff);
+        nombres[i] = (char*)malloc(strlen(buff) + 1);
+        strcpy(nombres[i] , buff);
+        
+        
     }
+    
+    MostrarPersonas(nombres , cantNombres);
+    
+    int numfuncion;
 
-    MostrarPersonas(nombres, cant);
+    printf("Para buscar nombre por clave ingrese el numero 2:");
+    scanf("%d", &numfuncion);
+    if (numfuncion == 1)
+     {
+        char clave[TAMA];
+        printf("\ningrese un palabra clave:");
+        scanf("%s", &clave);
 
-    for (int i=0; i<cant; i++){
-        free(nombres[i]);
+        char encontrado = buscarNombrePorClave(nombres, cantNombres, clave);
+        printf("\nnombre encontrado: %s", nombres[encontrado] );
     }
+    
 
     return 0;
 }
 
-void MostrarPersonas(char *vector[],int tam){
-    printf("Nombres almacenados: \n");
-    for(int i=0; i< tam; i++){
-        printf("Persona %d: %s\n", i+1 , vector[i]);
-    }
+void MostrarPersonas(char *nom[] , int cant){
+
+    printf("El nombre de las personas es :\n");
+    for (int i = 0; i < cant; i++)
+    {
+        printf("%s\n",nom[i]);
+    }   
+}
+int buscarNombrePorClave(char *nom[], int cant , char *frase){
+
+    for (int i = 0; i < cant; i++)
+    {
+       if (strstr(nom[i], frase) != NULL)
+       {
+            return i;
+       }else
+       {
+        return -1;
+       }
+       
+       
+    } 
+
 }
