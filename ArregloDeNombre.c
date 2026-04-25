@@ -5,6 +5,7 @@
 
 void MostrarPersonas(char *nom[] , int cant);
 int buscarNombrePorClave(char *nom[], int cant , char *frase);
+void BuscarNombrePorId(char *nom[], int can , int numEntero);
 
 int main(){
 
