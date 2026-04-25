@@ -24,7 +24,9 @@ float costoTotal(Cliente client);
 int main() {
     srand(time(NULL));
 
-    int canClientes=5;
+    int canClientes;
+    printf("Ingrese la cantidad de clientes: ");
+    scanf("%d", &canClientes);
 
     Cliente *clientes = (Cliente *)malloc(sizeof(Cliente) * canClientes);
 
